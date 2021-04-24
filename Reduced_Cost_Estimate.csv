@@ -1,0 +1,17 @@
+﻿Group hierarchy,Region,Description,Service,Upfront,Monthly,First 12 months total,Currency,Configuration summary
+Reduced Cost Estimate,US East (N. Virginia),,Amazon EC2,0,260.2,3122.40,USD,"Operating system (Linux), Quantity (4), Pricing strategy (On-Demand Instances 1 Year No Upfront), Storage amount (30 GB), Instance type (c5.large)"
+Reduced Cost Estimate,US East (N. Virginia),,Amazon Virtual Private Cloud (VPC),0,37.35,448.20,USD,Number of NAT Gateways (1)
+Reduced Cost Estimate,US East (N. Virginia),,S3 Standard,0,1177,14124.00,USD,S3 Standard storage (50000 GB per month)
+Reduced Cost Estimate,US East (N. Virginia),,Data Transfer,0,0,0.00,USD,"DT Inbound: Internet (0 TB per month), DT Outbound: Amazon CloudFront (0 TB per month)"
+Reduced Cost Estimate,US East (N. Virginia),,Amazon RDS for MySQL,0,1573.6399999999999,18883.68,USD,"Storage for each RDS instance (General Purpose SSD (gp2)), Storage amount (2500 GB), Quantity (1), Instance type (db.m5.2xlarge), Deployment option (Multi-AZ), Pricing strategy (OnDemand)"
+Reduced Cost Estimate,US East (N. Virginia),,Application Load Balancer,0,80.85,970.20,USD,Number of Application Load Balancers (2)
+Reduced Cost Estimate,US East (N. Virginia),,Amazon Virtual Private Cloud (VPC),0,269.91,3238.92,USD,"DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (3000 GB per month), DT Intra-Region: (0 TB per month), Data transfer cost (269.91)"
+Reduced Cost Estimate,US East (N. Virginia),,Amazon EC2,0,400.32,4803.84,USD,"Operating system (Linux), Quantity (4), Pricing strategy (On-Demand Instances 1 Year No Upfront), Storage amount (300 GB), Instance type (m5.large)"
+Reduced Cost Estimate,US East (N. Virginia),,Amazon Route 53,0,12.5,150.00,USD,Hosted Zones (1)
+
+
+Reduced cost rationale:
+
+Do not store archival media - get rid of IA S3 and reduce CloudFront data transfer from 20TB to 30TB per month
+m5.large instead of m5.xlarge for more limited backend calculation and analysis capabilities keeping the frontend responsive
+RDS m5.2xlarge instead of m5.4xlarge and storage halved - as we limit the backend capabilities we don't store so much user data

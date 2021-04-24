@@ -1,0 +1,53 @@
+Initial sizing rationale and assumptions
+
+Some sizing inspiration taken from:
+https://www.pingdom.com/blog/webpages-are-getting-larger-every-year-and-heres-why-it-matters/
+https://berkaweb.com/hosting/guides/bandwidth-requirements/
+https://www.concurrencylabs.com/blog/5-steps-for-finding-optimal-ec2-infrastructure/
+
+Instance sizing
+- 50000 users
+- 2 visits per day per user
+- each visit takes a minute
+- most of traffic focused within a single region / similar time zones
+    - i.e., most traffic within a couple hours in the morning and evening
+100000 visits / 180 minutes ~= 500 concurrent users peaks on a typical day
+
+- (https://www.concurrencylabs.com/blog/5-steps-for-finding-optimal-ec2-infrastructure/) 8 m5.large are enough for 1000 concurrent users, 4 should be fine for 500
+- but our front end is a lighter web server, which is more CPU than memory hungry, hence 4 c5.large
+- however, our site additionally has a demanding backend (let's say calculating stuff people want to see or searching for their potential new friends) 
+    - additional 4 backend m5.xlarge instances for the application; those instances also work with more data, so more storage
+- we don't know yet, how precise this estimate is and what the actual performance will be - we're starting with On-Demand to cost optimize later; in particular scheduled reservation may be suiting our traffic patterns
+
+
+Web Site traffic
+- 50000 users
+- 2 visits per day per user
+- 1MB web site traffic per visit (doesn't include high volume media, which is stored on S3 and downloaded through CloudFront)
+50000 * 2 * 1 * 30 days = 3000000MB = 3000GB / month
+
+S3
+- 50000 users
+- for each user we will store a total of 1GB in Standard on average plus 2GB of archived media in IA tier
+- requests for Standard tier: 
+    - 50000 users * 2 visits * 10 read media files = 1000000 * 30 = 30M GET requests
+    - 50000 users * 2 visits * 1 written media file = 100000 * 30 = 3M PUT requests
+- 1/10 of the above GET requests for IA tier
+
+CloudFront (the new calculator does not seem to show this, calculated with the old one)
+- 2 visits per day per user
+- 10MB of media per visit
+50000 * 2 * 10 * 30 days = 30000000MB = 30TB / month
+- and we want a custom SSL certificate for our domain
+
+NAT Gateway
+- system and application updates
+- low traffic
+
+Route53
+- we have a custom domain with some DNS traffic
+
+RDS
+- m5.xlarge
+- with Multi-AZ (seems to make more sense for single region than a Read Replica mentioned in the instructions)
+- 100MB per user 

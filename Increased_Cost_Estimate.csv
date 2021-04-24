@@ -1,0 +1,24 @@
+﻿Group hierarchy,Region,Description,Service,Upfront,Monthly,First 12 months total,Currency,Configuration summary
+Increased_Cost_Estimate,US East (N. Virginia),,Amazon EC2,0,260.2,3122.40,USD,"Operating system (Linux), Quantity (4), Pricing strategy (On-Demand Instances), Storage amount (30 GB), Instance type (c5.large)"
+Increased_Cost_Estimate,US East (N. Virginia),,Amazon Virtual Private Cloud (VPC),0,37.35,448.20,USD,Number of NAT Gateways (1)
+Increased_Cost_Estimate,US East (N. Virginia),,S3 Standard,0,2305.2,27662.40,USD,S3 Standard storage (100000 GB per month)
+Increased_Cost_Estimate,US East (N. Virginia),,S3 One Zone - Infrequent Access,0,3006,36072.00,USD,S3 One Zone-IA storage (300000 GB per month)
+Increased_Cost_Estimate,US East (N. Virginia),,Data Transfer,0,0,0.00,USD,"DT Inbound: Internet (0 TB per month), DT Outbound: Amazon CloudFront (0 TB per month)"
+Increased_Cost_Estimate,US East (N. Virginia),,Amazon RDS for MySQL,0,3147.2799999999997,37767.36,USD,"Storage for each RDS instance (General Purpose SSD (gp2)), Storage amount (5000 GB), Quantity (1), Instance type (db.m5.4xlarge), Deployment option (Multi-AZ), Pricing strategy (OnDemand)"
+Increased_Cost_Estimate,US East (N. Virginia),,Application Load Balancer,0,80.85,970.20,USD,Number of Application Load Balancers (2)
+Increased_Cost_Estimate,EU (Ireland),,Amazon Virtual Private Cloud (VPC),0,134.91,1618.92,USD,"DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (1500 GB per month), DT Intra-Region: (0 TB per month), Data transfer cost (134.91)"
+Increased_Cost_Estimate,EU (Ireland),,Amazon EC2,0,378.44,4541.28,USD,"Operating system (Linux), Quantity (2), Pricing strategy (On-Demand Instances 1 Year No Upfront), Storage amount (300 GB), Instance type (m5.xlarge)"
+Increased_Cost_Estimate,US East (N. Virginia),,Amazon Route 53,0,12.5,150.00,USD,Hosted Zones (1)
+Increased_Cost_Estimate,US East (N. Virginia),,Amazon EC2,0,680.64,8167.68,USD,"Operating system (Linux), Quantity (4), Pricing strategy (On-Demand Instances), Storage amount (300 GB), Instance type (m5.xlarge)"
+Increased_Cost_Estimate,EU (Ireland),,Application Load Balancer,0,60.79,729.48,USD,Number of Application Load Balancers (2)
+Increased_Cost_Estimate,EU (Ireland),,Amazon RDS for MySQL,0,3472.52,41670.24,USD,"Storage for each RDS instance (General Purpose SSD (gp2)), Storage amount (5000 GB), Quantity (1), Instance type (db.m5.4xlarge), Deployment option (Multi-AZ), Pricing strategy (OnDemand)"
+Increased_Cost_Estimate,EU (Ireland),,Amazon Virtual Private Cloud (VPC),0,39.84,478.08,USD,Number of NAT Gateways (1)
+Increased_Cost_Estimate,EU (Ireland),,Amazon EC2,0,293.52,3522.24,USD,"Operating system (Linux), Quantity (4), Pricing strategy (On-Demand Instances 1 Year No Upfront), Storage amount (30 GB), Instance type (c5.large)"
+
+
+Increased Cost Estimate Rationale
+
+Add a 2 region in Europe for better performance (as we open and market for our European users too) and an active-active DR site.
+Most of the infrastructure in this region is a clone of what we have in US. 
+RDS has a Multi-AZ Read Replica in this new region.
+S3's storage is increased in the original region without adding it to the new one, as we use CloudFront anyway.
